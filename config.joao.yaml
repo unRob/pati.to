@@ -1,0 +1,14 @@
+_config: !!joao
+  vault: nidito
+  name: pati.to:club
+smtp:
+  host: smtp.mailgun.org
+  port: 587
+  username: no-reply@mail.club.pati.to
+  password: !!secret
+do_token: !!secret
+cdn:
+  bucket: club-patito
+  endpoint: sjc1.vultrobjects.com
+  key: !!secret
+  secret: !!secret
