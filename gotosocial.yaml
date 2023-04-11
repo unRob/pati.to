@@ -91,6 +91,14 @@ db-type: "sqlite"
 # Default: ""
 db-address: "/alloc/gotosocial.db"
 
+# String. SQLite journaling mode.
+# SQLite only -- unused otherwise.
+# If set to empty string, the sqlite default will be used.
+# See: https://www.sqlite.org/pragma.html#pragma_journal_mode
+# Examples: ["DELETE", "TRUNCATE", "PERSIST", "MEMORY", "WAL", "OFF"]
+# Default: "WAL"
+db-sqlite-journal-mode: "WAL"
+
 
 ######################
 ##### WEB CONFIG #####
