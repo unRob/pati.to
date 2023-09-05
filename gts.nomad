@@ -89,7 +89,7 @@ job "club-patito" {
       user = "nobody"
 
       config {
-        image = "superseriousbusiness/gotosocial:0.8.0"
+        image = "superseriousbusiness/gotosocial:0.11.1"
         ports = ["gotosocial"]
         args = [
           "--config-path",
