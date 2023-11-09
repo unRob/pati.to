@@ -1,6 +1,6 @@
 job "club-patito" {
-  datacenters = ["nyc1"]
-  region = "nyc1"
+  datacenters = ["qro0"]
+  region = "qro0"
 
   vault {
     policies = ["club-patito"]
@@ -46,7 +46,7 @@ job "club-patito" {
       }
 
       config {
-        image = "litestream/litestream:0.3.9"
+        image = "litestream/litestream:0.3.12"
         args = ["restore", "/alloc/gotosocial.db"]
         volumes = ["secrets/litestream.yaml:/etc/litestream.yml"]
       }
@@ -73,7 +73,7 @@ job "club-patito" {
       }
 
       config {
-        image = "litestream/litestream:0.3.9"
+        image = "litestream/litestream:0.3.12"
         args = ["replicate"]
         volumes = ["secrets/litestream.yaml:/etc/litestream.yml"]
       }

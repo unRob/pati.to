@@ -6,17 +6,17 @@ terraform {
   required_providers {
     acme = {
       source  = "vancluever/acme"
-      version = "~> 2.5.3"
+      version = "~> 2.15.1"
     }
 
     digitalocean = {
       source = "digitalocean/digitalocean"
-      version = "~> 2.16.0"
+      version = "~> 2.29.0"
     }
 
     vault = {
       source  = "hashicorp/vault"
-      version = "~> 3.7.0"
+      version = "~> 3.18.0"
     }
   }
 
@@ -52,14 +52,13 @@ provider "digitalocean" {
   token = data.vault_generic_secret.DO.data.patito
 }
 
-provider "digitalocean" {
-  alias = "compute"
-  token = data.vault_generic_secret.DO.data.token
-}
-
-data "digitalocean_droplet" "bedstuy" {
-  provider = digitalocean.compute
-  name = "bedstuy"
+data "terraform_remote_state" "rob_mx" {
+  backend = "consul"
+  workspace = "default"
+  config = {
+    datacenter = "casa"
+    path = "nidito/state/rob.mx"
+  }
 }
 
 resource "vault_policy" "service" {
@@ -78,7 +77,7 @@ resource "digitalocean_record" "to_pati_club" {
   type   = "A"
   ttl    = 3600
   name   = "club"
-  value  = data.digitalocean_droplet.bedstuy.ipv4_address
+  value  = data.terraform_remote_state.rob_mx.outputs.bernal.ip
 }
 
 resource "digitalocean_record" "txt_smtp_domainkey" {
@@ -104,42 +103,3 @@ resource "digitalocean_record" "mx" {
   priority = each.value
 }
 
-
-data "terraform_remote_state" "registration" {
-  backend = "consul"
-  workspace = "default"
-  config = {
-    address = "consul.service.casa.consul:5554"
-    scheme = "https"
-    path = "nidito/state/letsencrypt/registration"
-  }
-}
-
-resource acme_certificate cert {
-  account_key_pem           = data.terraform_remote_state.registration.outputs.account_key
-  common_name               = "pati.to"
-  subject_alternative_names = ["*.pati.to"]
-  recursive_nameservers = ["1.1.1.1:53", "8.8.8.8:53"]
-
-  dns_challenge {
-    provider = "digitalocean"
-    config = {
-      DO_AUTH_TOKEN = data.vault_generic_secret.DO.data.patito
-      DO_PROPAGATION_TIMEOUT = 60
-      DO_TTL = 30
-    }
-  }
-}
-
-resource vault_generic_secret cert {
-  path = "nidito/tls/${acme_certificate.cert.common_name}"
-  data_json = jsonencode({
-    private_key = acme_certificate.cert.private_key_pem,
-    cert = join("", [
-      acme_certificate.cert.certificate_pem,
-      acme_certificate.cert.issuer_pem,
-    ])
-    issuer = acme_certificate.cert.issuer_pem,
-    bare_cert = acme_certificate.cert.certificate_pem,
-  })
-}

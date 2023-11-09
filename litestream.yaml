@@ -1,9 +1,11 @@
-{{- with secret "cfg/infra/tree/provider:cdn" }}
-access-key-id:     {{ .Data.key }}
-secret-access-key: {{ .Data.secret }}
-
 dbs:
   - path: /alloc/gotosocial.db
     replicas:
-      - url: s3://{{ .Data.bucket }}.{{ .Data.endpoint }}/club-patito/gotosocial.db
+{{- with secret "cfg/svc/tree/pati.to:club"}}
+      - name: vultr
+        url: s3://{{ .Data.cdn.bucket }}/db/gotosocial.db
+        access-key-id:     {{ .Data.cdn.key }}
+        secret-access-key: {{ .Data.cdn.secret }}
+        endpoint: {{ .Data.cdn.endpoint }}
+        type: s3
 {{- end }}
