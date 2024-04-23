@@ -1,13 +1,16 @@
+variable "package" {
+  type = map(object({
+    image   = string
+    version = string
+  }))
+  default = {}
+}
+
 job "club-patito" {
   datacenters = ["qro0"]
   region = "qro0"
+  namespace = "social"
 
-  vault {
-    policies = ["club-patito"]
-
-    change_mode   = "signal"
-    change_signal = "SIGHUP"
-  }
 
   group "club-patito" {
     reschedule {
@@ -39,6 +42,10 @@ job "club-patito" {
       driver = "docker"
       user = "nobody"
 
+      vault {
+        role = "club-patito"
+      }
+
       resources {
         cpu    = 128
         memory = 64
@@ -46,7 +53,7 @@ job "club-patito" {
       }
 
       config {
-        image = "litestream/litestream:0.3.12"
+        image = "${var.package.litestream.image}:${var.package.litestream.version}"
         args = ["restore", "/alloc/gotosocial.db"]
         volumes = ["secrets/litestream.yaml:/etc/litestream.yml"]
       }
@@ -66,6 +73,10 @@ job "club-patito" {
       driver = "docker"
       user = "nobody"
 
+      vault {
+        role = "club-patito"
+      }
+
       resources {
         cpu    = 256
         memory = 128
@@ -73,7 +84,7 @@ job "club-patito" {
       }
 
       config {
-        image = "litestream/litestream:0.3.12"
+        image = "${var.package.litestream.image}:${var.package.litestream.version}"
         args = ["replicate"]
         volumes = ["secrets/litestream.yaml:/etc/litestream.yml"]
       }
@@ -88,8 +99,12 @@ job "club-patito" {
       driver = "docker"
       user = "nobody"
 
+      vault {
+        role = "club-patito"
+      }
+
       config {
-        image = "superseriousbusiness/gotosocial:0.11.1"
+        image = "${var.package.self.image}:${var.package.self.version}"
         ports = ["gotosocial"]
         args = [
           "--config-path",
