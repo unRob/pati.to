@@ -1,0 +1,6 @@
+description: Comisión nacional para el reconocimiento de imbéciles al volante
+packages: {}
+build: echo "build tbd"
+deploy:
+  credentials: vault://nidito/deploy/cnriv.pati.to
+  src: ./src

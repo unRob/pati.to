@@ -1,0 +1,23 @@
+CACHE MANIFEST
+# v0.0.3-sigh nightlies
+# neta no se porqué uso esta mierda
+
+#JS
+lib/auto.js
+lib/circula.js
+lib/localizador.js
+lib/programa.js
+
+#HTML
+#index.html
+
+#CSS
+main.css
+http://fonts.googleapis.com/css?family=Ubuntu:400,700,300italic
+
+#IMG
+img/bg.jpg
+img/pato.svg
+
+NETWORK:
+*

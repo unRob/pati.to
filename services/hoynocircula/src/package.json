@@ -1,0 +1,30 @@
+{
+  "name": "cuando-circulo",
+  "version": "0.0.3",
+  "description": "¿Cuándo circulo en DF?",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jasmine-node spec"
+  },
+  "devDependencies" : {
+    "jasmine-node": "~> 1.14.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:unrob/cuando-circulo.git"
+  },
+  "keywords": [
+    "hoy no circula",
+    "df",
+    "mexico"
+  ],
+  "author": "Roberto Hidalgo",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/unrob/cuando-circulo/issues"
+  },
+  "homepage": "https://github.com/unrob/cuando-circulo"
+}

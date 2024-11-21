@@ -4,11 +4,6 @@ terraform {
   }
 
   required_providers {
-    acme = {
-      source  = "vancluever/acme"
-      version = "~> 2.15.1"
-    }
-
     digitalocean = {
       source = "digitalocean/digitalocean"
       version = "~> 2.29.0"
@@ -37,10 +32,6 @@ locals {
     "mxa.mailgun.org." = 10,
     "mxb.mailgun.org." = 10,
   }
-}
-
-provider "acme" {
-  server_url = "https://acme-v02.api.letsencrypt.org/directory"
 }
 
 // DO tokens for compute resources

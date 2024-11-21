@@ -1,0 +1,9 @@
+description: para el dominó
+packages:
+  self:
+    version: 0.0.0
+    source: https://github.com/unRob/fichitas
+build: echo "build tbd"
+deploy:
+  credentials: vault://nidito/deploy/fichitas.pati.to
+  src: ./src

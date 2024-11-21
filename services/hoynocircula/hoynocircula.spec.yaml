@@ -1,0 +1,6 @@
+description: Se me olvidaba qué día circulaba cuando tenía auto
+packages: {}
+build: exit
+deploy:
+  credentials: vault://nidito/deploy/hoynocircula.pati.to
+  src: ./src

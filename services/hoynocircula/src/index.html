@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+	<meta charset="utf-8" />
+	<title>Hoy chance circulo</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width" />
+
+	<!-- Web app -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="¿Circulo?">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<!-- iOS icons -->
+	<link rel="apple-touch-icon" href="img/icons/icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="img/icons/icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="img/icons/icon-iphone@2x.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="img/icons/icon-ipad@2x.png">
+
+	<!-- open graph -->
+	<meta property="og:description" content="Usa este app para saber cuándo y porqué circulas en la megalópolis" />
+	<meta property="og:title" content="Hoy (chance) circulo" />
+	<meta property="fb:admins" content="792675081" />
+	<meta property="og:image" content="http://hoynocircula.pati.to/img/og-icon.png" />
+	<meta property="og:url" content="http://hoynocircula.pati.to" />
+	<meta itemprop="name" content="¿Sabes si circula tu vehículo hoy en DF?" />
+	<meta itemprop="description" content="Usa este app para saber cuándo y porqué circulas en la megalópolis" />
+	<meta itemprop="image" content="http://hoynocircula.pati.to/img/share-icon.png" />
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@peeseeme">
+	<meta name="twitter:title" content="Hoy (chance) circulo">
+	<meta name="twitter:description" content="Usa este app para saber cuándo y porqué circulas en la megalópolis">
+	<meta name="twitter:creator" content="@peeseeme">
+	<meta name="twitter:image:src" content="http://hoynocircula.pati.to/img/share-icon.png">
+	<meta name="twitter:domain" content="http://hoynocircula.pati.to">
+
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+
+	<h1>¿Circulo hoy en DF?</h1>
+
+	<div id="container">
+		
+		<div id="card">
+			<main class="side front">
+				<section id="setup" class="hidden">
+					<p>¿Cuales son los dígitos de tu placa?</p>
+					<input id="placa" type="number" min="0" max="9999" step="1" placeholder="4242" pattern="\d*"/>
+					<p>¿Qué número de holograma tienes?</p>
+
+					<ul id="hologramas">
+						<li class="holograma">
+							<label>
+								<input type="radio" name="holograma" value="0" />
+								Cero
+							</label>
+						</li>
+						<li class="holograma">
+							<label>
+								<input type="radio" name="holograma" value="1" />
+								1
+							</label>
+						</li>
+						<li class="holograma">
+							<label>
+								<input type="radio" name="holograma" value="2" />
+								2
+							</label>
+						</li>
+					</ul>
+					
+					<button id="guardar-datos">Listo</button>
+				</section>
+
+				<section id="result" class="hidden">
+					<h2 id="hoy-circulo"></h2>
+					<span id="warn"></span>
+					<p id="razon"></p>
+
+					<div class="actions">
+					<a id="reset" href="#setup">Cambiar datos</a>
+				</section>
+				<a href="#switch" class="flippy">ayuda</a>
+			</main>
+
+			<div id="info" class="side back">
+				<a href="#switch" class="flippy">regresar</a>
+				<h2>¿Cómo funciona esto?</h2>
+				<p>Usamos la información de <a href="http://www.sedema.df.gob.mx" title="Secretaría del Medio Ambiente">SEDEMA</a> para calcular los días en los que tu automovil no circula, en función de la placa y holograma del mismo.</p>
+				<p>Todo el código vive en <a href="https://github.com/unRob/cuando-circulo" title="Repo en github">github</a>.</p>
+
+				<h2>¿Guardan los datos de mi auto?</h2>
+				<p><strong>No</strong>, ni se transmiten ni almacenan por nuestra parte, simplemente se guardan dentro de tu computadora o teléfono, y nosotros no tenemos acceso a los mismos.</p>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<a href="http://surrealista.mx" title="Partido Surrealista Mexicano">
+			<img src="img/pato.svg" title="patito" alt="mooo" />
+			Partido Surrealista Mexicano
+		</a>
+	</footer>
+
+
+	<script src="lib/programa.js"></script>
+	<script src="lib/auto.js"></script>
+	<script src="lib/localizador.js"></script>
+	<script src="lib/circula.js"></script>
+	<script src="main.js"></script>
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-37922009-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+</script>
+
+</body>
+</html>
